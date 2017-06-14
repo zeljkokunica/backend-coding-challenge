@@ -1,0 +1,30 @@
+<div ng-controller="ctrlNavigation" class="navigation-bar top-navigation-bar">
+	<div class="navigation-container">
+		<div ng-if="currentUser" class="icon-bar mobile">
+			<div class="icon clickable" at-clicktoggle="#app-menu" at-hide-on="click,popup">
+				<i class="icon apps white"></i>
+			</div>
+		</div>
+		<div class="logo">
+			<a ng-click="clickLogo()" ng-if="!currentUser.agencyExtranetContact"></a>
+		</div>
+		<h1 class="desktop">
+			<i ng-show="$navigation.get().pagetitle" class="divider"></i>
+			{{ $navigation.get().pagetitle }}
+		</h1>
+	</div>
+	<div id="app-menu" class="app-popup border-top-arrow">
+		<div class="icon-area mobile">
+			<div ng-if="hasModules()" class="icon clickable" at-tabgroup="mobile-app-menu-icons" at-tabselected="selectMenu(1)" at-stop-prop="true" at-tabdefault="true"><i class="icon white dot-grid hoverable"></i></div>
+			<div ng-if="!hasModules()" class="icon clickable"><i class="icon"></i></div>
+		</div>
+		<div class="border-pointer" ng-class="classMenu()"></div>
+		<div ng-show="showMenu == 1">
+			<div ng-if="hasModules()" class="app-icon-container">
+				<div ng-repeat="app in getApps() | filter:{ disabled: false } | orderBy:['level', 'title']" class="app-icon"><a ng-click="switchApp(app.app)" ng-href="#/{{ app.app }}"><i class="icon" ng-class="app.icon"></i><span>{{ app.title }}</span></a></div>
+			</div>
+		</div>
+		<div class="logo-area mobile">
+		</div>
+	</div>
+</div>

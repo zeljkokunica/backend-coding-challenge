@@ -1,0 +1,52 @@
+/******************************************************************************************
+
+Icon font template
+
+******************************************************************************************/
+
+@font-face {
+	font-family: "{{ fontName }}";
+	src:url("../fonts/{{ fontName }}.eot?{{commithash}}");
+	src:url("../fonts/{{ fontName }}.eot?{{commithash}}") format("embedded-opentype"),
+	url("../fonts/{{ fontName }}.ttf?{{commithash}}") format("truetype"),
+	url("../fonts/{{ fontName }}.woff?{{commithash}}") format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+.icon-{{ fontName }}() {
+	font-family: "{{ fontName }}";
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	font-size: inherit;
+	text-transform: none;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transform: translate(0, 0);
+}
+
+{% for glyph in glyphs %}
+.glyph-{{ glyph.name }}() {
+	position: relative;
+	&:before {
+		content: "\{{ glyph.unicode }}";
+	}
+}
+{% endfor %}
+
+.icontest {
+	.icon-{{ fontName }}();
+	width: 35px;
+	height: 35px;
+	font-size: 35px;
+	display: inline-block;
+
+{% for glyph in glyphs %}
+	&.{{ glyph.name }} {
+		.glyph-{{ glyph.name }}();
+	}
+{% endfor %}
+}
