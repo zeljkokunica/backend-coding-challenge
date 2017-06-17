@@ -16,7 +16,7 @@ var paths = {
 	},
 	build: {
 		source: "./build/source/",
-		target: "./build/dest/"
+		target: "./expense-service/src/main/resources/public/"
 	},
 	copy: [
 		"fonts/*.*",

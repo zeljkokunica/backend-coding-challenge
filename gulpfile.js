@@ -151,7 +151,8 @@ gulp.task("html", function() {
 		.pipe(replace(/{{branch}}/ig, settings.gitbranch))
 		.pipe(replace(/{{fonturl}}/ig, config.fonts))
 		.pipe(filesize())
-		.pipe(gulp.dest(settings.paths.static.targethtml));
+		.pipe(gulp.dest(settings.paths.static.targethtml))
+        .pipe(gulp.dest(settings.paths.build.target));
 });
 
 // Compile an individual directory's partials

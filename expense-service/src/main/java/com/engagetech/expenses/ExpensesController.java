@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/expenses", produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(value = "/app/expenses", produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE})
 public class ExpensesController {
 
     @Autowired
