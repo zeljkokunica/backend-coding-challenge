@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.util.regex.Pattern;
 
+/**
+ * Helper component for parsing value sent from the ui. Also calculates exchange rate if currency is specified.
+ */
 @Component
 public class AmountParser {
     private static final String NUMERIC_REGEX = "[0-9]+(\\.[0-9][0-9]?)?";

@@ -5,7 +5,7 @@ import feign.Param;
 import feign.RequestLine;
 
 /**
- * Connector to fixer.io
+ * Feign connector to fixer.io
  */
 public interface FixerIoExchangeConnector {
 

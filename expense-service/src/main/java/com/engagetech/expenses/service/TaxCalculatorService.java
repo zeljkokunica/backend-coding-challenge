@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ * Service for calculating VAT amount for UK.
+ */
 @Service
 public class TaxCalculatorService {
 

@@ -14,6 +14,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * API controller to handle expense related operation.
+ */
 @RestController
 @RequestMapping(value = "/app/expenses", produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE})
 public class ExpensesController {
