@@ -31,6 +31,17 @@ app.controller("ctrlExpenses", ["$rootScope", "$scope", "config", "restalchemy",
 		});
 	}
 
+	$scope.onNewExpenseAmountChange = function() {
+        var amount = $scope.newExpense.amount;
+        var vatAmountString = "0.00";
+        if (amount) {
+            var clearAmount = amount.replace(/[^0-9\.]+/g, '').trim();
+            var vatAmount = (parseFloat(clearAmount) * 0.20).toFixed(2);
+            vatAmountString = isNaN(vatAmount) ? "0.00" : vatAmount.toString();
+        }
+        $scope.newExpense.vat = vatAmountString;
+    }
+
 	$scope.saveExpense = function() {
 		if ($scope.expensesform.$valid) {
 			// Post the expense via REST
