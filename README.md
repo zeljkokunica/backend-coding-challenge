@@ -112,3 +112,12 @@ Feel free to comment your code, or put explanations in a pull request within the
 
 ##### Why doesn’t the test include X?
 Good question. Feel free to tell us how to make the test better. Or, you know, fork it and improve it!
+
+Starting the service
+--------------------
+- build angular code (the output will go into service public path so that it's exposed alongside the service)
+- cd expense-service
+- open src/main/resources/application.properties and set the db properties 
+- mvn clean package
+- run service: java -jar target/expense-0.0.1-SNAPSHOT.jar --server.port=8080
+- navigate to http://localhost:8080
