@@ -1,5 +1,6 @@
-package com.engagetech.expenses;
+package com.engagetech.expenses.controller;
 
+import com.engagetech.expenses.service.ExpenseService;
 import com.engagetech.expenses.domain.Expense;
 import com.engagetech.expenses.dto.ExpenseDto;
 import org.springframework.beans.factory.annotation.Autowired;

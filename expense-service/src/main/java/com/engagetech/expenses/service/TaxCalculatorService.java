@@ -1,4 +1,4 @@
-package com.engagetech.expenses;
+package com.engagetech.expenses.service;
 
 import com.engagetech.expenses.domain.Currency;
 import com.engagetech.expenses.domain.Expense;
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 @Service
-public class TaxCalculator {
+public class TaxCalculatorService {
 
     public void calculateTaxAmount(Expense expense, BigDecimal taxRate) {
         BigDecimal taxAmount = expense.getAmount()

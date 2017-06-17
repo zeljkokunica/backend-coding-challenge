@@ -1,6 +1,6 @@
 package com.engagetech.config;
 
-import com.engagetech.expenses.FixerIoExchangeConnector;
+import com.engagetech.expenses.service.FixerIoExchangeConnector;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

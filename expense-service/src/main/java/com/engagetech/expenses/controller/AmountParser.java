@@ -1,7 +1,8 @@
-package com.engagetech.expenses;
+package com.engagetech.expenses.controller;
 
 import com.engagetech.expenses.domain.Currency;
 import com.engagetech.expenses.domain.Expense;
+import com.engagetech.expenses.service.ExchangeRateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,8 +30,17 @@ public class AmountParser {
     private void parseCurrency(Expense expense, String amountValue) {
         String currencyCode = amountValue.replaceAll(NUMERIC_REGEX, "").trim();
         String amountText = amountValue.replaceAll(currencyCode, "").trim();
-        Currency currency = Currency.valueOf(currencyCode);
-        expense.setAmountCurrency(new BigDecimal(amountText));
+        Currency currency;
+        try {
+            currency = Currency.valueOf(currencyCode.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Unsupported currency " + currencyCode, e);
+        }
+        try {
+            expense.setAmountCurrency(new BigDecimal(amountText));
+        } catch (NumberFormatException nfe) {
+            throw new NumberFormatException("Invalid amount " + amountText);
+        }
         expense.setCurrency(currency);
         expense.setExchangeRate(exchangeRateService.determineExchangeRateToGbp(expense.getDate(), currency));
         expense.setAmount(expense.getAmountCurrency().multiply(expense.getExchangeRate()).setScale(Currency.GBP.getScale(), BigDecimal.ROUND_HALF_UP));

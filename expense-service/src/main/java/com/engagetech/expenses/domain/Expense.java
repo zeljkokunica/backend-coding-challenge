@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "expenses")
-public class Expense implements TaxableAmount, ExchangeableAmount {
+public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -75,7 +75,6 @@ public class Expense implements TaxableAmount, ExchangeableAmount {
         this.date = date;
     }
 
-    @Override
     public BigDecimal getAmount() {
         return amount;
     }
@@ -100,7 +99,6 @@ public class Expense implements TaxableAmount, ExchangeableAmount {
         this.taxAmount = taxAmount;
     }
 
-    @Override
     public BigDecimal getAmountCurrency() {
         return amountCurrency;
     }
@@ -109,7 +107,6 @@ public class Expense implements TaxableAmount, ExchangeableAmount {
         this.amountCurrency = amountCurrency;
     }
 
-    @Override
     public Currency getCurrency() {
         return currency;
     }

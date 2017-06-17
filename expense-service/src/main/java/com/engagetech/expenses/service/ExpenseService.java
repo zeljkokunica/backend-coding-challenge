@@ -1,5 +1,6 @@
-package com.engagetech.expenses;
+package com.engagetech.expenses.service;
 
+import com.engagetech.expenses.repository.ExpenseRepository;
 import com.engagetech.expenses.domain.Expense;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,15 +17,15 @@ public class ExpenseService {
     private ExpenseRepository expenseRepository;
 
     @Autowired
-    private TaxCalculator taxCalculator;
+    private TaxCalculatorService taxCalculatorService;
 
     public List<Expense> findByUserId(Long userId) {
-        return expenseRepository.findByUserId(userId);
+        return expenseRepository.findByUserIdOrderByDateDesc(userId);
     }
 
     public Expense save(Long userId, Expense expense) {
         expense.setUserId(userId);
-        taxCalculator.calculateTaxAmount(expense, BigDecimal.valueOf(20));
+        taxCalculatorService.calculateTaxAmount(expense, BigDecimal.valueOf(20));
         Expense savedExpense = expenseRepository.save(expense);
         return savedExpense;
     }

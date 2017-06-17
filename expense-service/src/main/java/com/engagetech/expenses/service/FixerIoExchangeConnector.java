@@ -1,14 +1,14 @@
-package com.engagetech.expenses;
+package com.engagetech.expenses.service;
 
 import com.engagetech.expenses.dto.FixerIoExchangeResult;
 import feign.Param;
 import feign.RequestLine;
 
+/**
+ * Connector to fixer.io
+ */
 public interface FixerIoExchangeConnector {
 
-//    http://api.fixer.io/2017-05-01?symbols=EUR,GBP
     @RequestLine("GET /{date}?base={currencyCode}&symbols=GBP")
-    FixerIoExchangeResult getCompanyInfo(@Param("date") String date, @Param("currencyCode") String currencyCode);
-
-
+    FixerIoExchangeResult getRateToGbp(@Param("date") String date, @Param("currencyCode") String currencyCode);
 }
