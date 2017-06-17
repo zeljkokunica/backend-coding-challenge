@@ -90,6 +90,28 @@ public class ExpenseControllerIntegrationTest {
         expenseRepository.deleteAll();
     }
 
+    @Test
+    public void saveExpenseEur() throws Exception {
+        ExpenseDto expenseDto = new ExpenseDto();
+        expenseDto.setDate(LocalDate.of(2017, 02, 28));
+        expenseDto.setReason("February expense");
+        expenseDto.setAmount("1000.00 EUR");
+        mvc.perform(post("/app/expenses")
+                .content(objectMapper.writeValueAsBytes(expenseDto))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("amount", is(new BigDecimal("853.05").toString())))
+                .andExpect(jsonPath("reason", is("February expense")))
+                .andExpect(jsonPath("vat", is(new BigDecimal("170.61").toString())));
+        mvc.perform(get("/app/expenses")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].amount", is(new BigDecimal("853.05").toString())))
+                .andExpect(jsonPath("$[0].vat", is(new BigDecimal("170.61").toString())));
+        expenseRepository.deleteAll();
+    }
+
     private void createTestExpense() {
         Expense expense = new Expense();
         expense.setAmount(new BigDecimal("100.00"));
