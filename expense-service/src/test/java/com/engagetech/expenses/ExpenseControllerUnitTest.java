@@ -77,7 +77,7 @@ public class ExpenseControllerUnitTest {
         expense.setReason(expenseDto.getReason());
         expense.setAmount(new BigDecimal(expenseDto.getAmount()));
         given(expenseService.save(Mockito.anyLong(), Mockito.any(Expense.class))).willReturn(expense);
-        mvc.perform(post("/app/expenses", expenseDto)
+        mvc.perform(post("/app/expenses")
                 .content(objectMapper.writeValueAsBytes(expenseDto))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
