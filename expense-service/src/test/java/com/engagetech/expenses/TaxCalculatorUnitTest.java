@@ -1,20 +1,14 @@
 package com.engagetech.expenses;
 
-import com.engagetech.expenses.controller.AmountParser;
-import com.engagetech.expenses.domain.Currency;
 import com.engagetech.expenses.domain.Expense;
-import com.engagetech.expenses.service.ExchangeRateService;
 import com.engagetech.expenses.service.TaxCalculatorService;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TaxCalculatorUnitTest {
