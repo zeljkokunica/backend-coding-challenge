@@ -23,6 +23,9 @@ public class UserDetailsService implements org.springframework.security.core.use
         }
         String lowercaseLogin = login.toLowerCase();
         User user = userService.findByUsername(login);
+        if (user == null) {
+            return null;
+        }
         return new org.springframework.security.core.userdetails.User(
                 lowercaseLogin,
                 user.getPassword(),

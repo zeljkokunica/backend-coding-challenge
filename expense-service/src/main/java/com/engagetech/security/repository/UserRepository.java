@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * In memory fixed implementation of users to make it simple.
+ */
 @Repository
 public class UserRepository implements InitializingBean {
 

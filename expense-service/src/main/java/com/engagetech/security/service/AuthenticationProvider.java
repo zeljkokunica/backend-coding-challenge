@@ -1,7 +1,6 @@
 package com.engagetech.security.service;
 
 import com.engagetech.security.dto.UserAuthentication;
-import com.engagetech.security.service.UserService;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,11 +26,8 @@ public class AuthenticationProvider implements org.springframework.security.auth
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        UsernamePasswordAuthenticationToken token =
-                (UsernamePasswordAuthenticationToken) authentication;
-
+        UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         String login = token.getName();
-
         UserDetails user = userDetailsService.loadUserByUsername(login);
         if (user == null) {
             throw new UsernameNotFoundException("User does not exists");
