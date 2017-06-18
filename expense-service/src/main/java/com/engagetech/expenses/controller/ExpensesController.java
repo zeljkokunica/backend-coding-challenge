@@ -1,15 +1,16 @@
 package com.engagetech.expenses.controller;
 
-import com.engagetech.expenses.service.ExpenseService;
 import com.engagetech.expenses.domain.Expense;
 import com.engagetech.expenses.dto.ExpenseDto;
+import com.engagetech.expenses.service.ExpenseService;
+import com.engagetech.security.dto.UserAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,7 @@ public class ExpensesController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public List<ExpenseDto> getExpenses() {
-        return convertToDtoList(expenseService.findByUserId(1L));
+        return convertToDtoList(expenseService.findByUserId(getUserId()));
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST)
@@ -39,7 +40,7 @@ public class ExpensesController {
         expense.setDate(Date.from(expenseDto.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         expense.setReason(expenseDto.getReason());
         amountParser.parseAmount(expense, expenseDto.getAmount());
-        Expense savedExpense = expenseService.save(1L, expense);
+        Expense savedExpense = expenseService.save(getUserId(), expense);
         return convertToDto(savedExpense);
     }
 
@@ -57,6 +58,11 @@ public class ExpensesController {
                 .stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    private Long getUserId() {
+        UserAuthentication userAuthentication = (UserAuthentication) SecurityContextHolder.getContext().getAuthentication();
+        return userAuthentication.getUser().getId();
     }
 
 }

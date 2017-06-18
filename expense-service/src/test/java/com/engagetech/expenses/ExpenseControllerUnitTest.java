@@ -34,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ExpensesController.class)
-public class ExpenseControllerUnitTest {
+public class ExpenseControllerUnitTest extends AuthenticatedTest {
     @Autowired
     private MockMvc mvc;
 
