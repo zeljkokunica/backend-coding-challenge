@@ -1,38 +1,33 @@
 package com.engagetech.expenses;
 
 import com.engagetech.ExpenseApplication;
-import com.engagetech.expenses.controller.AmountParser;
-import com.engagetech.expenses.controller.ExpensesController;
 import com.engagetech.expenses.domain.Currency;
 import com.engagetech.expenses.domain.Expense;
 import com.engagetech.expenses.dto.ExpenseDto;
 import com.engagetech.expenses.repository.ExpenseRepository;
-import com.engagetech.expenses.service.ExpenseService;
+import com.engagetech.security.domain.User;
+import com.engagetech.security.domain.UserRole;
+import com.engagetech.security.dto.UserAuthentication;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.Rollback;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.ZoneOffset;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -45,7 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @TestPropertySource(
         locations = "classpath:application-test.properties")
-public class ExpenseControllerIntegrationTest {
+public class ExpenseControllerIntegrationTest extends AuthenticatedTest {
 
     @Autowired
     private MockMvc mvc;
