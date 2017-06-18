@@ -62,8 +62,6 @@ public class ExpenseControllerUnitTest extends AuthenticatedTest {
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].amount", is(expense.getAmount().toString())))
                 .andExpect(jsonPath("$[0].vat", is(expense.getTaxAmount().toString())));
-
-
     }
 
     @Test
