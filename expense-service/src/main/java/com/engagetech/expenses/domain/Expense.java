@@ -50,6 +50,7 @@ public class Expense {
     private BigDecimal exchangeRate;
 
     @Column(name = "reason")
+    @NotNull
     private String reason;
 
     @Column(name = "user_id")

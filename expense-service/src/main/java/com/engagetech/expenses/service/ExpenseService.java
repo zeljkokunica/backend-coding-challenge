@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,6 +28,9 @@ public class ExpenseService {
     }
 
     public Expense save(Long userId, Expense expense) {
+        if (expense.getDate().after(new Date())) {
+            throw new IllegalArgumentException("Expense cannot be set in the future");
+        }
         expense.setUserId(userId);
         taxCalculatorService.calculateTaxAmount(expense, UK_VAT_RATE);
         expense.getAmount().setScale(Currency.GBP.getScale());
