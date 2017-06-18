@@ -3,6 +3,9 @@ package com.engagetech.expenses.dto;
 import java.math.BigDecimal;
 import java.util.Map;
 
+/**
+ * Mapping for fixer.io result.
+ */
 public class FixerIoExchangeResult {
     private String base;
     private String date;

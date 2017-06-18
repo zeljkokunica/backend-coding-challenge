@@ -11,6 +11,9 @@ import feign.jackson.JacksonEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Configuration for fixer.io open feign service implementation.
+ */
 @Configuration
 public class FixerIoExchangeConnectorConfig {
 

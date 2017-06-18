@@ -10,6 +10,9 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+/**
+ * Service used to determine exchange rate between some currency and GBP at the specific date.
+ */
 @Service
 public class ExchangeRateService {
     private static final DateTimeFormatter EXCHANGE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");

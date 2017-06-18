@@ -9,11 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * API controller to handle expense related operation.
+ */
 @RestController
 @RequestMapping(value = "/app/expenses", produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE})
 public class ExpensesController {
